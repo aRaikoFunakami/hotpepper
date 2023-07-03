@@ -4,7 +4,7 @@ import os, logging
 
 url = "http://webservice.recruit.co.jp/hotpepper/gourmet/v1/"
 params = {
-    "key": "",
+    "key": "your hotpeper key",
     "lat": "35.44838095046963",
     "lng": "139.6303173696368",
     "keyword": "ホルモン",
