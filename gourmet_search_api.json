@@ -1,0 +1,436 @@
+{
+  "GourmetSearchAPI": {
+    "requestURL": "http://webservice.recruit.co.jp/hotpepper/gourmet/v1/",
+    "parameters": [
+      {
+        "name": "key",
+        "description": "APIを利用するために割り当てられたキーを設定します。",
+        "required": true,
+        "example": null
+      },
+      {
+        "name": "id",
+        "description": "お店に割り当てられた番号で検索します。",
+        "required": false,
+        "example": "J999999999",
+        "notes": "20個まで指定可。"
+      },
+      {
+        "name": "name",
+        "description": "お店の名前で検索(部分一致)します。",
+        "required": false,
+        "example": null
+      },
+      {
+        "name": "name_kana",
+        "description": "お店の読みかなで検索(部分一致)します。",
+        "required": false,
+        "example": null
+      },
+      {
+        "name": "name_any",
+        "description": "お店の名前または読みかな両方をOR検索(部分一致)します。",
+        "required": false,
+        "example": null
+      },
+      {
+        "name": "tel",
+        "description": "お店の電話番号で検索します。半角数字(ハイフンなし)",
+        "required": false,
+        "example": "035550000"
+      },
+      {
+        "name": "address",
+        "description": "お店の住所で検索(部分一致)します。",
+        "required": false,
+        "example": null
+      },
+      {
+        "name": "special",
+        "description": "特集コードをANDで絞り込みができます。特集コードは特集マスタAPI参照。複数指定可能。",
+        "required": false,
+        "example": "LT0086",
+        "notes": "複数指定可能。"
+      },
+      {
+        "name": "special_or",
+        "description": "特集コードをORで絞り込みができます。特集コードは特集マスタAPI参照。複数指定可能。",
+        "required": false,
+        "example": "LT0086,LT0045",
+        "notes": "複数指定可能。"
+      },
+      {
+        "name": "special_category",
+        "description": "特集カテゴリコードをANDで絞り込みができます。特集カテゴリコードは特集カテゴリマスタAPI参照。複数指定可能。",
+        "required": false,
+        "example": "SPD1",
+        "notes": "複数指定可能。"
+      },
+      {
+        "name": "special_category_or",
+        "description": "特集カテゴリコードをORで絞り込みができます。特集カテゴリコードは特集カテゴリマスタAPI参照。複数指定可能。",
+        "required": false,
+        "example": "SPD1,SPD3",
+        "notes": "複数指定可能。"
+      },
+      {
+        "name": "large_service_area",
+        "description": "エリアに割り当てられたコード番号で検索します。指定できるコード番号はエリアマスタAPIを参照。",
+        "required": false,
+        "example": null
+      },
+      {
+        "name": "service_area",
+        "description": "サービスエリアコード",
+        "required": false,
+        "example": null,
+        "notes": "3個まで指定可。"
+      },
+      {
+        "name": "large_area",
+        "description": "大エリアコード",
+        "required": false,
+        "example": null,
+        "notes": "3個まで指定可。"
+      },
+      {
+        "name": "middle_area",
+        "description": "中エリアコード",
+        "required": false,
+        "example": null,
+        "notes": "5個まで指定可。"
+      },
+      {
+        "name": "small_area",
+        "description": "小エリアコード",
+        "required": false,
+        "example": null,
+        "notes": "5個まで指定可。"
+      },
+      {
+        "name": "keyword",
+        "description": "店名かな、店名、住所、駅名、お店ジャンルキャッチ、キャッチのフリーワード検索(部分一致)が可能です。文字コードはUTF8。半角スペース区切りの文字列を渡すことでAND検索になる。複数指定可能。",
+        "required": false,
+        "example": null,
+        "notes": "複数指定可能。"
+      },
+      {
+        "name": "lat",
+        "description": "ある地点からの範囲内のお店の検索を行う場合の緯度です。",
+        "required": false,
+        "example": "35.669220"
+      },
+      {
+        "name": "lng",
+        "description": "ある地点からの範囲内のお店の検索を行う場合の経度です。",
+        "required": false,
+        "example": "139.761457"
+      },
+      {
+        "name": "range",
+        "description": "ある地点からの範囲内のお店の検索を行う場合の範囲を5段階で指定できます。たとえば300m以内の検索ならrange=1を指定します",
+        "required": false,
+        "example": "1",
+        "notes": "1: 300m, 2: 500m, 3: 1000m (初期値), 4: 2000m, 5: 3000m"
+      },
+      {
+        "name":"datum",
+        "description": "緯度・経度の測地系を指定できます。world: 世界測地系、tokyo: 旧日本測地系。初期値は world。",
+        "required": false,
+        "example": "world"
+      },
+      {
+        "name": "ktai_coupon",
+        "description": "携帯クーポンの有無で絞り込み条件を指定します。",
+        "required": false,
+        "example": "1",
+        "notes": "1：携帯クーポンなし, 0：携帯クーポンあり, 指定なし：絞り込みなし"
+      },
+      {
+        "name": "genre",
+        "description": "お店のジャンル(サブジャンル含む)で絞込むことができます。指定できるコードについてはジャンルマスタAPI参照",
+        "required": false,
+        "example": null,
+        "notes": "複数指定可能。"
+      },
+      {
+        "name": "budget",
+        "description": "ディナー予算で絞り込むことができます。指定できるコードについてはディナー予算マスタAPI参照",
+        "required": false,
+        "example": null,
+        "notes": "2個まで指定可。"
+      },
+      {
+        "name": "party_capacity",
+        "description": "宴会収容人数で絞り込むことができます。指定数より大きな収容人数のお店を検索します",
+        "required": false,
+        "example": "50"
+      },
+      {
+        "name": "wifi",
+        "description": "WiFi 経由によるインターネット利用が可能なお店を絞り込みます。",
+        "required": false,
+        "example": "0",
+        "notes": "0:絞り込まない（初期値）, 1:絞り込む"
+      },
+      {
+        "name": "wedding",
+        "description": "ウェディング・二次会等のお問い合わせが可能なお店を絞り込みます。",
+        "required": false,
+        "example": "0",
+        "notes": "0:絞り込まない（初期値）, 1:絞り込む"
+      },
+      {
+        "name": "course",
+        "description": "「コースあり」という条件で絞り込むかどうかを指定します。",
+        "required": false,
+        "example": "0",
+        "notes": "0:絞り込まない（初期値）, 1:絞り込む"
+      },
+      {
+        "name": "free_drink",
+        "description": "「飲み放題」という条件で絞り込むかどうかを指定します。",
+        "required": false,
+        "example": "0",
+        "notes": "0:絞り込まない（初期値）, 1:絞り込む"
+      },
+      {
+        "name": "free_food",
+        "description": "「食べ放題」という条件で絞り込むかどうかを指定します。",
+        "required": false,
+        "example": "0",
+        "notes": "0:絞り込まない（初期値）, 1:絞り込む"
+      },
+      {
+        "name": "private_room",
+        "description": "「個室あり」という条件で絞り込むかどうかを指定します。",
+        "required": false,
+        "example": "0",
+        "notes": "0:絞り込まない（初期値）, 1:絞り込む"
+      },
+      {
+        "name": "horigotatsu",
+        "description": "「掘りごたつあり」という条件で絞り込むかどうかを指定します。",
+        "required": false,
+        "example": "0",
+        "notes": "0:絞り込まない（初期値）, 1:絞り込む"
+      },
+      {
+        "name": "tatami",
+        "description": "「座敷あり」という条件で絞り込むかどうかを指定します。",
+        "required": false,
+        "example": "0",
+        "notes": "0:絞り込まない（初期値）, 1:絞り込む"
+      },
+      {
+        "name": "cocktail",
+        "description": "「カクテル充実」という条件で絞り込むかどうかを指定します。",
+        "required": false,
+        "example": "0",
+        "notes": "0:絞り込まない（初期値）, 1:絞り込む"
+      },
+      {
+        "name": "shochu",
+        "description": "「焼酎充実」という条件で絞り込むかどうかを指定します。",
+        "required": false,
+        "example": "0",
+        "notes": "0:絞り込まない（初期値）, 1:絞り込む"
+      },
+      {
+        "name": "sake",
+        "description": "「日本酒充実」という条件で絞り込むかどうかを指定します。",
+        "required": false,
+        "example": "0",
+        "notes": "0:絞り込まない（初期値）, 1:絞り込む"
+      },
+      {
+        "name": "wine",
+        "description": "「ワイン充実」という条件で絞り込むかどうかを指定します。",
+        "required": false,
+        "example": "0",
+        "notes": "0:絞り込まない（初期値）, 1:絞り込む"
+      },
+      {
+        "name": "card",
+        "description": "「カード可」という条件で絞り込むかどうかを指定します。",
+        "required": false,
+        "example": "0",
+        "notes": "0:絞り込まない（初期値）, 1:絞り込む"
+      },
+      {
+        "name": "non_smoking",
+        "description": "「禁煙席」という条件で絞り込むかどうかを指定します。",
+        "required": false,
+        "example": "0",
+        "notes": "0:絞り込まない（初期値）, 1:絞り込む"
+      },
+      {
+        "name": "charter",
+        "description": "「貸切可」という条件で絞り込むかどうかを指定します。",
+        "required": false,
+        "example": "0",
+        "notes": "0:絞り込まない（初期値）, 1:絞り込む"
+      },
+      {
+        "name": "ktai",
+        "description": "「携帯電話OK」という条件で絞り込むかどうかを指定します。",
+        "required": false,
+        "example": "0",
+        "notes": "0:絞り込まない（初期値）, 1:絞り込む"
+      },
+      {
+        "name": "parking",
+        "description": "「駐車場あり」という条件で絞り込むかどうかを指定します。",
+        "required": false,
+        "example": "0",
+        "notes": "0:絞り込まない（初期値）, 1:絞り込む"
+      },
+      {
+        "name": "barrier_free",
+        "description": "「バリアフリー」という条件で絞り込むかどうかを指定します。",
+        "required": false,
+        "example": "0",
+        "notes": "0:絞り込まない（初期値）, 1:絞り込む"
+      },
+      {
+        "name": "sommelier",
+        "description": "「ソムリエがいる」という条件で絞り込むかどうかを指定します。",
+        "required": false,
+        "example": "0",
+        "notes": "0:絞り込まない（初期値）, 1:絞り込む"
+      },
+      {
+        "name": "night_view",
+        "description": "「夜景がキレイ」という条件で絞り込むかどうかを指定します。",
+        "required": false,
+        "example": "0",
+        "notes": "0:絞り込まない（初期値）, 1:絞り込む"
+      },
+      {
+        "name": "open_air",
+        "description": "「オープンエア」という条件で絞り込むかどうかを指定します。
+        "example": "0",
+        "notes": "0:絞り込まない（初期値）, 1:絞り込む"
+      },
+      {
+        "name": "show",
+        "description": "「ライブ・ショーあり」という条件で絞り込むかどうかを指定します。",
+        "required": false,
+        "example": "0",
+        "notes": "0:絞り込まない（初期値）, 1:絞り込む"
+      },
+      {
+        "name": "equipment",
+        "description": "「エンタメ設備」という条件で絞り込むかどうかを指定します。",
+        "required": false,
+        "example": "0",
+        "notes": "0:絞り込まない（初期値）, 1:絞り込む"
+      },
+      {
+        "name": "karaoke",
+        "description": "「カラオケあり」という条件で絞り込むかどうかを指定します。",
+        "required": false,
+        "example": "0",
+        "notes": "0:絞り込まない（初期値）, 1:絞り込む"
+      },
+      {
+        "name": "band",
+        "description": "「バンド演奏可」という条件で絞り込むかどうかを指定します。",
+        "required": false,
+        "example": "0",
+        "notes": "0:絞り込まない（初期値）, 1:絞り込む"
+      },
+      {
+        "name": "tv",
+        "description": "「TV・プロジェクター」という条件で絞り込むかどうかを指定します。",
+        "required": false,
+        "example": "0",
+        "notes": "0:絞り込まない（初期値）, 1:絞り込む"
+      },
+      {
+        "name": "lunch",
+        "description": "「ランチあり」という条件で絞り込むかどうかを指定します。",
+        "required": false,
+        "example": "0",
+        "notes": "0:絞り込まない（初期値）, 1:絞り込む"
+      },
+      {
+        "name": "midnight",
+        "description": "「23時以降も営業」という条件で絞り込むかどうかを指定します。",
+        "required": false,
+        "example": "0",
+        "notes": "0:絞り込まない（初期値）, 1:絞り込む"
+      },
+      {
+        "name": "midnight_meal",
+        "description": "「23時以降食事OK」という条件で絞り込むかどうかを指定します。",
+        "required": false,
+        "example": "0",
+        "notes": "0:絞り込まない（初期値）, 1:絞り込む"
+      },
+      {
+        "name": "english",
+        "description": "「英語メニューあり」という条件で絞り込むかどうかを指定します。",
+        "required": false,
+        "example": "0",
+        "notes": "0:絞り込まない（初期値）, 1:絞り込む"
+      },
+      {
+        "name": "pet",
+        "description": "「ペット可」という条件で絞り込むかどうかを指定します。",
+        "required": false,
+        "example": "0",
+        "notes": "0:絞り込まない（初期値）, 1:絞り込む"
+      },
+      {
+        "name": "child",
+        "description": "「お子様連れOK」という条件で絞り込むかどうかを指定します。",
+        "required": false,
+        "example": "0",
+        "notes": "0:絞り込まない（初期値）, 1:絞り込む"
+      },
+      {
+        "name": "credit_card",
+        "description": "クレジットカードの種別ごとに絞り込むことができます。指定できるコードについてはクレジットカードマスタAPI参照。(2008/02/08追加)",
+        "required": false,
+        "example": "",
+        "notes": "複数指定可"
+      },
+      {
+        "name": "type",
+        "description": "レスポンス項目の項目数を指定できます。liteを指定すると、主要項目のみ出力されます。出力項目はレスポンスフィールドを参照してください。credit_card、specialを指定することで、クレジットカード、特集をレスポンスに付加できます。 +でつないで指定することで、複数指定が可能です。 例:type=credit_card+specialと指定することで、クレジットカードと特集両方をレスポンスに付加可能です。",
+        "required": false,
+        "example": "lite",
+        "notes": "lite:主要項目のみ, credit_card:クレジットカードをレスポンスに付加, special:特集をレスポンスに付加, 指定なし:クレジットカード、特集以外をすべて出力（初期値）"
+      },
+      {
+        "name": "order",
+        "description": "検索結果の並び順を指定します。おススメ順は定期的に更新されます。※ 位置検索の場合、「4:オススメ順」以外は指定に関係なく、強制的に距離順でソートされます。",
+        "required": false,
+        "example": "1",
+        "notes": "1:店名かな順, 2:ジャンルコード順, 3:小エリアコード順, 4:おススメ順, 初期値はおススメ順。位置から検索を行った場合は距離順"
+      },
+      {
+        "name": "start",
+        "description": "検索結果の何件目から出力するかを指定します。",
+        "required": false,
+        "example": "",
+        "notes": "初期値:1"
+      },
+      {
+        "name": "count",
+        "description": "検索結果の最大出力データ数を指定します。",
+        "required": false,
+        "example": "",
+        "notes": "初期値:10、最小1、最大100"
+      },
+      {
+        "name": "format",
+        "description": "レスポンスをXMLかJSONかJSONPかを指定します。JSONPの場合、さらにパラメータ callback=コールバック関数名 を指定する事により、javascript側コールバック関数の名前を指定できます。",
+        "required": false,
+        "example": "",
+        "notes": "初期値:xml。xml または json または jsonp。"
+      }
+    ]
+  }
+}
