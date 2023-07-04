@@ -1,0 +1,143 @@
+hotpepper_function = {
+    "name": "get_hotpepper_info",
+    "description": "レストラン情報を取得する",
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "lat": {
+                "type": "string",
+                "description": "ある地点からの範囲内のお店の検索を行う場合の緯度です。",
+                "example": "35.669220",
+            },
+            "lng": {
+                "type": "string",
+                "description": "ある地点からの範囲内のお店の検索を行う場合の経度です。",
+                "example": "139.761457",
+            },
+            "keyword": {
+                "type": "string",
+                "description": "店名かな、店名、住所、駅名、お店ジャンルキャッチ、キャッチのフリーワード検索(部分一致)が可能です",
+                "example": "139.761457",
+            },
+            "range": {
+                "type": "integer",
+                "description": "ある地点からの範囲内のお店の検索を行う場合の範囲を5段階で指定できます。たとえば300m以内の検索ならrange=1を指定します",
+                "example": "1",
+                "notes": "1: 300m, 2: 500m, 3: 1000m (初期値), 4: 2000m, 5: 3000m",
+            },
+            "free_drink": {
+                "type": "integer",
+                "description": "「飲み放題」という条件で絞り込むかどうかを指定します。",
+                "example": "0",
+                "notes": "0:絞り込まない（初期値）, 1:絞り込む",
+            },
+            "free_food": {
+                "type": "integer",
+                "description": "「食べ放題」という条件で絞り込むかどうかを指定します。",
+                "example": "0",
+                "notes": "0:絞り込まない（初期値）, 1:絞り込む",
+            },
+			"count" : {
+				"type": "integer",
+				"description": "検索結果の最大出力データ数を指定します。",
+				"example": "",
+				"notes": "初期値:10、最小1、最大100",
+			},
+            "private_room": {
+                "type": "integer",
+                "description": "「個室あり」という条件で絞り込むかどうかを指定します。",
+                "example": "0",
+                "notes": "0:絞り込まない（初期値）, 1:絞り込む",
+            },
+            "horigotatsu": {
+                "type": "integer",
+                "description": "「掘りごたつあり」という条件で絞り込むかどうかを指定します。",
+                "example": "0",
+                "notes": "0:絞り込まない（初期値）, 1:絞り込む",
+            },
+            "tatami": {
+                "type": "integer",
+                "description": "「座敷あり」という条件で絞り込むかどうかを指定します。",
+                "example": "0",
+                "notes": "0:絞り込まない（初期値）, 1:絞り込む",
+            },
+            "shochu": {
+                "type": "integer",
+                "description": "「焼酎充実」という条件で絞り込むかどうかを指定します。",
+                "example": "0",
+                "notes": "0:絞り込まない（初期値）, 1:絞り込む",
+            },
+            "sake": {
+                "type": "integer",
+                "description": "「日本酒充実」という条件で絞り込むかどうかを指定します。",
+                "example": "0",
+                "notes": "0:絞り込まない（初期値）, 1:絞り込む",
+            },
+            "wine": {
+                "type": "integer",
+                "description": "「ワイン充実」という条件で絞り込むかどうかを指定します。",
+                "example": "0",
+                "notes": "0:絞り込まない（初期値）, 1:絞り込む",
+            },
+            "card": {
+                "type": "integer",
+                "description": "「カード可」という条件で絞り込むかどうかを指定します。",
+                "example": "0",
+                "notes": "0:絞り込まない（初期値）, 1:絞り込む",
+            },
+            "parking": {
+                "type": "integer",
+                "description": "「駐車場あり」という条件で絞り込むかどうかを指定します。",
+                "example": "0",
+                "notes": "0:絞り込まない（初期値）, 1:絞り込む",
+            },
+            "barrier_free": {
+                "type": "integer",
+                "description": "「バリアフリー」という条件で絞り込むかどうかを指定します。",
+                "example": "0",
+                "notes": "0:絞り込まない（初期値）, 1:絞り込む",
+            },
+            "night_view": {
+                "type": "integer",
+                "description": "「夜景がキレイ」という条件で絞り込むかどうかを指定します。",
+                "example": "0",
+                "notes": "0:絞り込まない（初期値）, 1:絞り込む",
+            },
+            "open_air": {
+                "type": "integer",
+                "description": "「オープンエア」という条件で絞り込むかどうかを指定します。",
+                "example": "0",
+                "notes": "0:絞り込まない（初期値）, 1:絞り込む",
+            },
+            "lunch": {
+                "type": "integer",
+                "description": "「ランチあり」という条件で絞り込むかどうかを指定します。",
+                "example": "0",
+                "notes": "0:絞り込まない（初期値）, 1:絞り込む",
+            },
+            "english": {
+                "type": "integer",
+                "description": "「英語メニューあり」という条件で絞り込むかどうかを指定します。",
+                "example": "0",
+                "notes": "0:絞り込まない（初期値）, 1:絞り込む",
+            },
+            "pet": {
+                "type": "integer",
+                "description": "「ペット可」という条件で絞り込むかどうかを指定します。",
+                "example": "0",
+                "notes": "0:絞り込まない（初期値）, 1:絞り込む",
+            },
+            "credit_card": {
+                "type": "string",
+                "description": "クレジットカードの種別ごとに絞り込むことができます。指定できるコードについてはクレジットカードマスタAPI参照。(2008/02/08追加)",
+                "example": "",
+                "notes": "複数指定可",
+            },
+        },
+        "required": [
+            "lat",
+            "lng",
+            "keyword",
+        ],
+    },
+}

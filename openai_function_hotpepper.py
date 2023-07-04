@@ -3,7 +3,7 @@ import json
 import os, logging
 
 url = "http://webservice.recruit.co.jp/hotpepper/gourmet/v1/"
-params = {
+sample_params = {
     "key": "your hotpeper key",
     "lat": "35.44838095046963",
     "lng": "139.6303173696368",
@@ -11,7 +11,8 @@ params = {
     "order": "4",
     "count": "3",
     "format": "json",
-    "type": "lite",
+    "free_drink": 1,
+#    "type": "lite",
 }
 
 
@@ -23,15 +24,27 @@ def load_config():
         config = json.load(file)
     return config
 
+def query_hotpepper(params):
+    config = load_config()
+    params["key"] = config["hotpepper_api_key"]
+    params["format"] = "json"
+    logging.debug('param: %s', params)
+    response = requests.get(url, params=params)
+    data = response.json()
+    return data
+
 
 def main():
-	logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(filename)s:%(funcName)s[%(lineno)d] - %(message)s")
-	config = load_config()
-	params["key"] = config["hotpepper_api_key"]
-	response = requests.get(url, params=params)
-	data = response.json()
-	formatted_data = json.dumps(data, indent=4, ensure_ascii=False)
-	print(formatted_data)
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(filename)s:%(funcName)s[%(lineno)d] - %(message)s")
+    data = query_hotpepper(sample_params)
+    for shop in data["results"]["shop"]:
+        shop_name = shop["name"]
+        free_drink_status = shop["free_drink"]
+        print(f"ショップ名: {shop_name}")
+        print(f"無料ドリンクの提供: {free_drink_status}")
+        print()
+    #formatted_data = json.dumps(data, indent=4, ensure_ascii=False)
+    #print(formatted_data)
 
 if __name__ == '__main__':
     main()
