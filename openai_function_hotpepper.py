@@ -2,7 +2,6 @@ import openai
 import json
 import os
 import logging
-import inspect
 import query_hotpepper
 
 #
@@ -18,27 +17,32 @@ def load_config():
         config = json.load(file)
     return config
 
+def filtered_response(data, filter):
+    shops = []
+    for shop in data["results"]["shop"]:
+        shops.append({key: shop[key] for key in filter})
+    return shops
+
+
+default_filter = ["name",
+#            "access",
+#           "card",
+        "catch",
+#            "genre",
+#            "free_drink",
+#           "free_food"
+        ]
 
 #
-# chatGPTが自動的に選択する関数
+# call by openai functional calling
 #
-
-
-# 緯度と経度の情報からレストランの情報を取得する
-def get_hotpepper_info(params):
-    logging.info("params %s", params)
+def get_hotpepper_info(params, filter = default_filter):
+    logging.debug("params %s", params)
     shops = query_hotpepper.query_hotpepper(params)
-    for shop in shops["results"]["shop"]:
-        print(f'ショップ名: {shop.get("name")}')
-        print(f'無料ドリンクの提供: {shop.get("free_drink")}')
-        print(f'食べ放題の提供: {shop.get("free_food")}')
-        print()
-    #print(json.dumps(shops, indent=4, ensure_ascii=False))
-    if __name__ == "__main__":
-        return get_hotpepper_info
-    else:
-        return shops
-
+    logging.debug("shops:%s", json.dumps(shops, indent=2, ensure_ascii=False))
+    filtered_shops = filtered_response(shops, filter)
+    logging.info("shops:%s", json.dumps(filtered_shops, indent=2, ensure_ascii=False))
+    return    return json.dumps(filtered_shops, indent=2, ensure_ascii=False)
 
 hotpepper_function = {
     "name": "get_hotpepper_info",
@@ -58,7 +62,7 @@ hotpepper_function = {
             },
             "keyword": {
                 "type": "string",
-                "description": "店名かな、店名、住所、駅名、お店ジャンルキャッチ、キャッチのフリーワード検索(部分一致)が可能です。ジャンルを指定する場合はイタリアンレストランではなくイタリアンを指定する。",
+                "description": "レストランのジャンル名を指定する。",
                 "example": "139.761457",
             },
             "range": {
@@ -125,10 +129,9 @@ def non_streaming_chat(text):
     if message.get("function_call"):
         function_response = call_defined_function(message)
         #
-        # 関数のレスポンスをベースに ChatGPT に回答を作成させる
-        # 今回は何もしない
+        # Returns the name of the function called for unit test
         #
-        return function_response
+        return message["function_call"]["name"]
     else:
         return "chatgpt"
 
@@ -169,7 +172,7 @@ queries = [
 
 def main():
     logging.basicConfig(
-        level=logging.WARNING,
+        level=logging.INFO,
         format="%(asctime)s - %(filename)s:%(funcName)s[%(lineno)d] - %(message)s",
     )
     for query in queries:
