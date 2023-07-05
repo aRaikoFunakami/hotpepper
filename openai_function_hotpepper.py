@@ -169,13 +169,12 @@ queries = [
 
 def main():
     logging.basicConfig(
-        level=logging.INFO,
+        level=logging.WARNING,
         format="%(asctime)s - %(filename)s:%(funcName)s[%(lineno)d] - %(message)s",
     )
     for query in queries:
         response = chat(query[0])
         print(f"[{query[1] == response}] 期待:{query[1]}, 実際:{response}, 質問:{query[0]}")
-
 
 if __name__ == "__main__":
     main()
