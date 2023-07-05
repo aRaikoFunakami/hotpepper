@@ -34,15 +34,33 @@ def query_hotpepper(params):
     return data
 
 
+def filtered_response(data, filter):
+    shops = []
+    for shop in data["results"]["shop"]:
+        shops.append({key: shop[key] for key in filter})
+    return json.dumps(shops, indent=4, ensure_ascii=False)
+
+
 def main():
     logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(filename)s:%(funcName)s[%(lineno)d] - %(message)s")
     data = query_hotpepper(sample_params)
-    for shop in data["results"]["shop"]:
-        shop_name = shop["name"]
-        free_drink_status = shop["free_drink"]
-        print(f"ショップ名: {shop_name}")
-        print(f"無料ドリンクの提供: {free_drink_status}")
-        print()
+    #for shop in data["results"]["shop"]:
+    #    shop_name = shop["name"]
+    #    free_drink_status = shop["free_drink"]
+    #    print(f"ショップ名: {shop_name}")
+    #    print(f"無料ドリンクの提供: {free_drink_status}")
+    #    print()
+
+    filter = ["name",
+                "access",
+                "card",
+                "catch",
+                "genre",
+                "free_drink",
+                "free_food"
+                ]
+    print(filtered_response(data, filter))
+
     #formatted_data = json.dumps(data, indent=4, ensure_ascii=False)
     #print(formatted_data)
 

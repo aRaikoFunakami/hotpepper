@@ -3,7 +3,7 @@ import json
 import os
 import logging
 import inspect
-import openai_function_hotpepper
+import query_hotpepper
 
 #
 # Config
@@ -27,15 +27,17 @@ def load_config():
 # 緯度と経度の情報からレストランの情報を取得する
 def get_hotpepper_info(params):
     logging.info("params %s", params)
-    shops = openai_function_hotpepper.query_hotpepper(params)
+    shops = query_hotpepper.query_hotpepper(params)
     for shop in shops["results"]["shop"]:
         print(f'ショップ名: {shop.get("name")}')
         print(f'無料ドリンクの提供: {shop.get("free_drink")}')
         print(f'食べ放題の提供: {shop.get("free_food")}')
         print()
-
     #print(json.dumps(shops, indent=4, ensure_ascii=False))
-    return inspect.currentframe().f_code.co_name
+    if __name__ == "__main__":
+        return get_hotpepper_info
+    else:
+        return shops
 
 
 hotpepper_function = {
@@ -152,8 +154,8 @@ template = """'
 
 queries = [
     ["東京でおすすめの飲み放題プランのある中華レストランを3件教えて", "get_hotpepper_info"],
-#    ["東京でおすすめの食べ放題プランのあるイタリアンを教えて", "get_hotpepper_info"],
-#    ["大阪で安い居酒屋を探してください", "get_hotpepper_info"],
+    ["東京でおすすめの食べ放題プランのあるイタリアンを教えて", "get_hotpepper_info"],
+    ["大阪で安い居酒屋を探してください", "get_hotpepper_info"],
 #    ["京都で有名な寿司店を教えてください", "get_hotpepper_info"],
 #    ["札幌で人気のカフェを教えてください", "get_hotpepper_info"],
 #    ["福岡で美味しいラーメン屋を探しています", "get_hotpepper_info"],
