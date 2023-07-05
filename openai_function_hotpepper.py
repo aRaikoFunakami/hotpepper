@@ -42,7 +42,7 @@ def get_hotpepper_info(params, filter = default_filter):
     logging.debug("shops:%s", json.dumps(shops, indent=2, ensure_ascii=False))
     filtered_shops = filtered_response(shops, filter)
     logging.info("shops:%s", json.dumps(filtered_shops, indent=2, ensure_ascii=False))
-    return    return json.dumps(filtered_shops, indent=2, ensure_ascii=False)
+    return filtered_shops
 
 hotpepper_function = {
     "name": "get_hotpepper_info",
